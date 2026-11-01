@@ -1,0 +1,147 @@
+[
+  {
+    "step": 1,
+    "actor": "deepseek_chat",
+    "action": "search_documents",
+    "arguments": {
+      "query": "报销 报账 期限 天数"
+    },
+    "observation": {
+      "ok": true,
+      "query": "报销 报账 期限 天数",
+      "matched_topics": [
+        "expense_deadline"
+      ],
+      "matches": [
+        {
+          "document_id": "D01",
+          "title": "员工费用报销规则 A",
+          "version_date": "2026-01-05",
+          "topic": "expense_deadline",
+          "snippet_ids": [
+            "S01"
+          ],
+          "scope": null,
+          "priority": null
+        },
+        {
+          "document_id": "D02",
+          "title": "员工费用报销规则 B",
+          "version_date": "2026-02-10",
+          "topic": "expense_deadline",
+          "snippet_ids": [
+            "S01"
+          ],
+          "scope": null,
+          "priority": null
+        }
+      ],
+      "corpus_revision": "31c9237ed104"
+    },
+    "decision_basis": "查找报销截止期限规定",
+    "model_turn": 1,
+    "next_action": "parallel_calls_rejected"
+  },
+  {
+    "step": 2,
+    "actor": "deepseek_chat",
+    "action": "parallel_calls_rejected",
+    "arguments": {},
+    "observation": {
+      "ok": false,
+      "error": "parallel_calls_rejected"
+    },
+    "decision_basis": "并行动作可能跳过检索与原文读取的依赖",
+    "model_turn": 2,
+    "next_action": "read_snippet"
+  },
+  {
+    "step": 3,
+    "actor": "deepseek_chat",
+    "action": "read_snippet",
+    "arguments": {
+      "document_id": "D01",
+      "snippet_id": "S01"
+    },
+    "observation": {
+      "ok": true,
+      "document_id": "D01",
+      "snippet_id": "S01",
+      "version_date": "2026-01-05",
+      "title": "员工费用报销规则 A",
+      "topic": "expense_deadline",
+      "quote": "员工费用报销应在费用发生后 30 天内提交。",
+      "source_hash": "68345a56ea3b"
+    },
+    "decision_basis": "读取D01报销期限原文",
+    "model_turn": 3,
+    "next_action": "read_snippet"
+  },
+  {
+    "step": 4,
+    "actor": "deepseek_chat",
+    "action": "read_snippet",
+    "arguments": {
+      "document_id": "D02",
+      "snippet_id": "S01"
+    },
+    "observation": {
+      "ok": true,
+      "document_id": "D02",
+      "snippet_id": "S01",
+      "version_date": "2026-02-10",
+      "title": "员工费用报销规则 B",
+      "topic": "expense_deadline",
+      "quote": "员工费用报销应在费用发生后 15 天内提交。",
+      "source_hash": "24acb17b096f"
+    },
+    "decision_basis": "读取D02报销期限原文",
+    "model_turn": 4,
+    "next_action": "finish"
+  },
+  {
+    "step": 5,
+    "actor": "deepseek_chat",
+    "action": "finish",
+    "arguments": {
+      "status": "conflict"
+    },
+    "observation": {
+      "ok": true,
+      "accepted": true,
+      "task_status": "needs_clarification",
+      "answer": "现有资料对报销期限存在冲突，不能确定统一答案：D01（2026-01-05）：“员工费用报销应在费用发生后 30 天内提交。”；D02（2026-02-10）：“员工费用报销应在费用发生后 15 天内提交。”。请确认适用的制度、适用范围或优先级。",
+      "citations": [
+        {
+          "ok": true,
+          "document_id": "D01",
+          "snippet_id": "S01",
+          "version_date": "2026-01-05",
+          "title": "员工费用报销规则 A",
+          "topic": "expense_deadline",
+          "quote": "员工费用报销应在费用发生后 30 天内提交。",
+          "source_hash": "68345a56ea3b"
+        },
+        {
+          "ok": true,
+          "document_id": "D02",
+          "snippet_id": "S01",
+          "version_date": "2026-02-10",
+          "title": "员工费用报销规则 B",
+          "topic": "expense_deadline",
+          "quote": "员工费用报销应在费用发生后 15 天内提交。",
+          "source_hash": "24acb17b096f"
+        }
+      ],
+      "evidence_gaps": [
+        "制度适用范围与优先级未提供"
+      ],
+      "incomplete_reason": null,
+      "conflict": true,
+      "clarification_question": "请确认适用的制度、适用范围或优先级。"
+    },
+    "decision_basis": "D01规定30天内，D02规定15天内，两者均无适用范围或优先级说明，构成冲突。",
+    "model_turn": 5,
+    "next_action": null
+  }
+]

@@ -1,0 +1,12 @@
+[
+  {
+    "document_id": "D01",
+    "version_date": "2026-01-05",
+    "title": "员工费用报销规则 A",
+    "topic": "expense_deadline",
+    "aliases": ["报销", "报账", "发票", "票据", "花完钱", "费用发生", "expense claim"],
+    "scope": null,
+    "priority": null,
+    "snippets": [{"snippet_id": "S01", "text": "员工费用报销应在费用发生后 30 天内提交。"}]
+  }
+]

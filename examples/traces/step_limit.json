@@ -1,0 +1,33 @@
+[
+  {
+    "step": 1,
+    "actor": "mock_policy",
+    "action": "search_documents",
+    "arguments": {
+      "query": "忘记公司密码后怎么重置？"
+    },
+    "observation": {
+      "ok": true,
+      "query": "忘记公司密码后怎么重置？",
+      "matched_topics": [
+        "password_reset"
+      ],
+      "matches": [
+        {
+          "document_id": "D03",
+          "title": "员工账号找回 FAQ",
+          "version_date": "2026-03-01",
+          "topic": "password_reset",
+          "snippet_ids": [
+            "S01"
+          ],
+          "scope": "全体员工",
+          "priority": null
+        }
+      ],
+      "corpus_revision": "31c9237ed104"
+    },
+    "decision_basis": "检索当前问题及必要的对话上下文",
+    "next_action": null
+  }
+]

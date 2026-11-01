@@ -1,0 +1,130 @@
+[
+  {
+    "step": 1,
+    "actor": "mock_policy",
+    "action": "search_documents",
+    "arguments": {
+      "query": "员工报销期限是多久？"
+    },
+    "observation": {
+      "ok": true,
+      "query": "员工报销期限是多久？",
+      "matched_topics": [
+        "expense_deadline"
+      ],
+      "matches": [
+        {
+          "document_id": "D01",
+          "title": "员工费用报销规则 A",
+          "version_date": "2026-01-05",
+          "topic": "expense_deadline",
+          "snippet_ids": [
+            "S01"
+          ],
+          "scope": null,
+          "priority": null
+        },
+        {
+          "document_id": "D02",
+          "title": "员工费用报销规则 B",
+          "version_date": "2026-02-10",
+          "topic": "expense_deadline",
+          "snippet_ids": [
+            "S01"
+          ],
+          "scope": null,
+          "priority": null
+        }
+      ],
+      "corpus_revision": "31c9237ed104"
+    },
+    "decision_basis": "检索当前问题及必要的对话上下文",
+    "next_action": "read_snippet"
+  },
+  {
+    "step": 2,
+    "actor": "mock_policy",
+    "action": "read_snippet",
+    "arguments": {
+      "document_id": "D01",
+      "snippet_id": "S01"
+    },
+    "observation": {
+      "ok": true,
+      "document_id": "D01",
+      "snippet_id": "S01",
+      "version_date": "2026-01-05",
+      "title": "员工费用报销规则 A",
+      "topic": "expense_deadline",
+      "quote": "员工费用报销应在费用发生后 30 天内提交。",
+      "source_hash": "68345a56ea3b"
+    },
+    "decision_basis": "读取检索命中的原文，核对引用及可能冲突",
+    "next_action": "read_snippet"
+  },
+  {
+    "step": 3,
+    "actor": "mock_policy",
+    "action": "read_snippet",
+    "arguments": {
+      "document_id": "D02",
+      "snippet_id": "S01"
+    },
+    "observation": {
+      "ok": true,
+      "document_id": "D02",
+      "snippet_id": "S01",
+      "version_date": "2026-02-10",
+      "title": "员工费用报销规则 B",
+      "topic": "expense_deadline",
+      "quote": "员工费用报销应在费用发生后 15 天内提交。",
+      "source_hash": "24acb17b096f"
+    },
+    "decision_basis": "读取检索命中的原文，核对引用及可能冲突",
+    "next_action": "finish"
+  },
+  {
+    "step": 4,
+    "actor": "mock_policy",
+    "action": "finish",
+    "arguments": {
+      "status": "conflict"
+    },
+    "observation": {
+      "ok": true,
+      "accepted": true,
+      "task_status": "needs_clarification",
+      "answer": "现有资料对报销期限存在冲突，不能确定统一答案：D01（2026-01-05）：“员工费用报销应在费用发生后 30 天内提交。”；D02（2026-02-10）：“员工费用报销应在费用发生后 15 天内提交。”。请确认适用的制度、适用范围或优先级。",
+      "citations": [
+        {
+          "ok": true,
+          "document_id": "D01",
+          "snippet_id": "S01",
+          "version_date": "2026-01-05",
+          "title": "员工费用报销规则 A",
+          "topic": "expense_deadline",
+          "quote": "员工费用报销应在费用发生后 30 天内提交。",
+          "source_hash": "68345a56ea3b"
+        },
+        {
+          "ok": true,
+          "document_id": "D02",
+          "snippet_id": "S01",
+          "version_date": "2026-02-10",
+          "title": "员工费用报销规则 B",
+          "topic": "expense_deadline",
+          "quote": "员工费用报销应在费用发生后 15 天内提交。",
+          "source_hash": "24acb17b096f"
+        }
+      ],
+      "evidence_gaps": [
+        "制度适用范围与优先级未提供"
+      ],
+      "incomplete_reason": null,
+      "conflict": true,
+      "clarification_question": "请确认适用的制度、适用范围或优先级。"
+    },
+    "decision_basis": "两份制度期限不同且无适用范围或优先级",
+    "next_action": null
+  }
+]

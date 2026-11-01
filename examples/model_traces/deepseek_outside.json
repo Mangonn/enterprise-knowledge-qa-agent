@@ -1,0 +1,111 @@
+[
+  {
+    "step": 1,
+    "actor": "deepseek_chat",
+    "action": "search_documents",
+    "arguments": {
+      "query": "年假 天数"
+    },
+    "observation": {
+      "ok": true,
+      "query": "年假 天数",
+      "matched_topics": [],
+      "matches": [],
+      "corpus_revision": "31c9237ed104"
+    },
+    "decision_basis": "查找公司年假政策文档",
+    "model_turn": 1,
+    "next_action": "parallel_calls_rejected"
+  },
+  {
+    "step": 2,
+    "actor": "deepseek_chat",
+    "action": "parallel_calls_rejected",
+    "arguments": {},
+    "observation": {
+      "ok": false,
+      "error": "parallel_calls_rejected"
+    },
+    "decision_basis": "并行动作可能跳过检索与原文读取的依赖",
+    "model_turn": 2,
+    "next_action": "search_documents"
+  },
+  {
+    "step": 3,
+    "actor": "deepseek_chat",
+    "action": "search_documents",
+    "arguments": {
+      "query": "annual leave policy"
+    },
+    "observation": {
+      "ok": true,
+      "query": "annual leave policy",
+      "matched_topics": [],
+      "matches": [],
+      "corpus_revision": "31c9237ed104"
+    },
+    "decision_basis": "换用英文关键词检索年假政策",
+    "model_turn": 3,
+    "next_action": "search_documents"
+  },
+  {
+    "step": 4,
+    "actor": "deepseek_chat",
+    "action": "search_documents",
+    "arguments": {
+      "query": "休假 制度 员工福利"
+    },
+    "observation": {
+      "ok": true,
+      "query": "休假 制度 员工福利",
+      "matched_topics": [],
+      "matches": [],
+      "corpus_revision": "31c9237ed104"
+    },
+    "decision_basis": "检索休假制度相关文档",
+    "model_turn": 4,
+    "next_action": "search_documents"
+  },
+  {
+    "step": 5,
+    "actor": "deepseek_chat",
+    "action": "search_documents",
+    "arguments": {
+      "query": "年假"
+    },
+    "observation": {
+      "ok": true,
+      "query": "年假",
+      "matched_topics": [],
+      "matches": [],
+      "corpus_revision": "31c9237ed104"
+    },
+    "decision_basis": "用最短关键词再次检索年假",
+    "model_turn": 5,
+    "next_action": "finish"
+  },
+  {
+    "step": 6,
+    "actor": "deepseek_chat",
+    "action": "finish",
+    "arguments": {
+      "status": "insufficient"
+    },
+    "observation": {
+      "ok": true,
+      "accepted": true,
+      "task_status": "insufficient",
+      "answer": "现有资料没有足够依据回答该问题。",
+      "citations": [],
+      "evidence_gaps": [
+        "没有检索到对应制度或 FAQ"
+      ],
+      "incomplete_reason": null,
+      "conflict": false,
+      "clarification_question": null
+    },
+    "decision_basis": "多次检索（年假、年假天数、annual leave policy、休假制度）均无匹配文档，无依据回答。",
+    "model_turn": 6,
+    "next_action": null
+  }
+]

@@ -1,0 +1,103 @@
+{
+  "question": "公司年假有几天？",
+  "history": [],
+  "task_status": "insufficient",
+  "answer": "现有资料没有足够依据回答该问题。",
+  "citations": [],
+  "evidence_gaps": [
+    "没有检索到对应制度或 FAQ"
+  ],
+  "incomplete_reason": null,
+  "conflict": false,
+  "clarification_question": null,
+  "mode": "mock_policy",
+  "corpus_revision": "31c9237ed104",
+  "target_topics": [],
+  "tool_results": {
+    "search_documents": [
+      {
+        "ok": true,
+        "query": "公司年假有几天？",
+        "matched_topics": [],
+        "matches": [],
+        "corpus_revision": "31c9237ed104"
+      }
+    ],
+    "read_snippet": []
+  },
+  "tool_call_count": 1,
+  "steps": [
+    {
+      "step": 1,
+      "action": "search_documents",
+      "status": "succeeded",
+      "tool_result": {
+        "ok": true,
+        "query": "公司年假有几天？",
+        "matched_topics": [],
+        "matches": [],
+        "corpus_revision": "31c9237ed104"
+      }
+    },
+    {
+      "step": 2,
+      "action": "finish",
+      "status": "succeeded",
+      "tool_result": {
+        "ok": true,
+        "accepted": true,
+        "task_status": "insufficient",
+        "answer": "现有资料没有足够依据回答该问题。",
+        "citations": [],
+        "evidence_gaps": [
+          "没有检索到对应制度或 FAQ"
+        ],
+        "incomplete_reason": null,
+        "conflict": false,
+        "clarification_question": null
+      }
+    }
+  ],
+  "trace": [
+    {
+      "step": 1,
+      "actor": "mock_policy",
+      "action": "search_documents",
+      "arguments": {
+        "query": "公司年假有几天？"
+      },
+      "observation": {
+        "ok": true,
+        "query": "公司年假有几天？",
+        "matched_topics": [],
+        "matches": [],
+        "corpus_revision": "31c9237ed104"
+      },
+      "decision_basis": "检索当前问题及必要的对话上下文",
+      "next_action": "finish"
+    },
+    {
+      "step": 2,
+      "actor": "mock_policy",
+      "action": "finish",
+      "arguments": {
+        "status": "insufficient"
+      },
+      "observation": {
+        "ok": true,
+        "accepted": true,
+        "task_status": "insufficient",
+        "answer": "现有资料没有足够依据回答该问题。",
+        "citations": [],
+        "evidence_gaps": [
+          "没有检索到对应制度或 FAQ"
+        ],
+        "incomplete_reason": null,
+        "conflict": false,
+        "clarification_question": null
+      },
+      "decision_basis": "未检索到支持问题的文档",
+      "next_action": null
+    }
+  ]
+}

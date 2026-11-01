@@ -1,0 +1,86 @@
+[
+  {
+    "step": 1,
+    "actor": "mock_policy",
+    "action": "search_documents",
+    "arguments": {
+      "query": "我忘记公司密码了，怎么重置？"
+    },
+    "observation": {
+      "ok": true,
+      "query": "我忘记公司密码了，怎么重置？",
+      "matched_topics": [
+        "password_reset"
+      ],
+      "matches": [
+        {
+          "document_id": "D03",
+          "title": "员工账号找回 FAQ",
+          "version_date": "2026-03-01",
+          "topic": "password_reset",
+          "snippet_ids": [
+            "S01"
+          ],
+          "scope": "全体员工",
+          "priority": null
+        }
+      ],
+      "corpus_revision": "31c9237ed104"
+    },
+    "decision_basis": "检索当前问题及必要的对话上下文",
+    "next_action": "read_snippet"
+  },
+  {
+    "step": 2,
+    "actor": "mock_policy",
+    "action": "read_snippet",
+    "arguments": {
+      "document_id": "D03",
+      "snippet_id": "S01"
+    },
+    "observation": {
+      "ok": true,
+      "document_id": "D03",
+      "snippet_id": "S01",
+      "version_date": "2026-03-01",
+      "title": "员工账号找回 FAQ",
+      "topic": "password_reset",
+      "quote": "忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。",
+      "source_hash": "23eb914d9ff1"
+    },
+    "decision_basis": "读取检索命中的原文，核对引用及可能冲突",
+    "next_action": "finish"
+  },
+  {
+    "step": 3,
+    "actor": "mock_policy",
+    "action": "finish",
+    "arguments": {
+      "status": "answered"
+    },
+    "observation": {
+      "ok": true,
+      "accepted": true,
+      "task_status": "answered",
+      "answer": "依据已读取的原文：D03（2026-03-01）：“忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。”。",
+      "citations": [
+        {
+          "ok": true,
+          "document_id": "D03",
+          "snippet_id": "S01",
+          "version_date": "2026-03-01",
+          "title": "员工账号找回 FAQ",
+          "topic": "password_reset",
+          "quote": "忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。",
+          "source_hash": "23eb914d9ff1"
+        }
+      ],
+      "evidence_gaps": [],
+      "incomplete_reason": null,
+      "conflict": false,
+      "clarification_question": null
+    },
+    "decision_basis": "已读取原文，相关资料可支持回答",
+    "next_action": null
+  }
+]

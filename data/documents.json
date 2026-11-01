@@ -1,0 +1,42 @@
+[
+  {
+    "document_id": "D01",
+    "version_date": "2026-01-05",
+    "title": "员工费用报销规则 A",
+    "topic": "expense_deadline",
+    "aliases": ["报销", "报账", "发票", "票据", "花完钱", "费用发生", "expense claim"],
+    "scope": null,
+    "priority": null,
+    "snippets": [{"snippet_id": "S01", "text": "员工费用报销应在费用发生后 30 天内提交。"}]
+  },
+  {
+    "document_id": "D02",
+    "version_date": "2026-02-10",
+    "title": "员工费用报销规则 B",
+    "topic": "expense_deadline",
+    "aliases": ["报销", "报账", "发票", "票据", "花完钱", "费用发生", "expense claim"],
+    "scope": null,
+    "priority": null,
+    "snippets": [{"snippet_id": "S01", "text": "员工费用报销应在费用发生后 15 天内提交。"}]
+  },
+  {
+    "document_id": "D03",
+    "version_date": "2026-03-01",
+    "title": "员工账号找回 FAQ",
+    "topic": "password_reset",
+    "aliases": ["密码", "账号", "账户", "登录", "重置", "找回", "企业邮箱", "验证码", "password"],
+    "scope": "全体员工",
+    "priority": null,
+    "snippets": [{"snippet_id": "S01", "text": "忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。"}]
+  },
+  {
+    "document_id": "D04",
+    "version_date": "2026-04-01",
+    "title": "远程办公访问 FAQ",
+    "topic": "vpn_access",
+    "aliases": ["VPN", "远程办公", "远程访问", "内网"],
+    "scope": "全体员工",
+    "priority": null,
+    "snippets": [{"snippet_id": "S01", "text": "远程访问公司内网前，员工应在 IT 服务门户申请 VPN 权限，获得批准后使用企业账号登录。"}]
+  }
+]
