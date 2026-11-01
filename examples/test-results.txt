@@ -14,11 +14,12 @@ test_paraphrase_retrieves_same_conflict (test_agent.KnowledgeAcceptanceTests.tes
 test_read_timeout_is_failed_and_then_model_retries (test_agent.KnowledgeAcceptanceTests.test_read_timeout_is_failed_and_then_model_retries) ... ok
 test_replacing_conflicting_text_resolves_conflict (test_agent.KnowledgeAcceptanceTests.test_replacing_conflicting_text_resolves_conflict) ... ok
 test_replacing_source_text_changes_answer_and_hash (test_agent.KnowledgeAcceptanceTests.test_replacing_source_text_changes_answer_and_hash) ... ok
+test_same_topic_but_unsupported_payout_detail_is_not_answered (test_agent.KnowledgeAcceptanceTests.test_same_topic_but_unsupported_payout_detail_is_not_answered) ... ok
 test_search_timeout_is_observed_and_recovered (test_agent.KnowledgeAcceptanceTests.test_search_timeout_is_observed_and_recovered) ... ok
 test_single_policy_can_answer_thirty_days (test_agent.KnowledgeAcceptanceTests.test_single_policy_can_answer_thirty_days) ... ok
 test_unsupported_detail_is_not_filled_in (test_agent.KnowledgeAcceptanceTests.test_unsupported_detail_is_not_filled_in) ... ok
 
 ----------------------------------------------------------------------
-Ran 19 tests in 0.042s
+Ran 20 tests in 0.047s
 
 OK

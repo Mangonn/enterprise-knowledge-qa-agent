@@ -10,7 +10,7 @@ python3 examples/run_examples.py
 python3 examples/run_model_examples.py  # 需 DEEPSEEK_API_KEY 和网络
 ```
 
-结果：19 项自动测试通过；12 组离线 CLI 输入、实际输出及 Trace；6 组真实 DeepSeek 模型实际输出及 Trace。测试日志见 [`examples/test-results.txt`](../examples/test-results.txt)。离线 Mock 只验证流程和边界；真实模型运行记录证明的是这六次运行的动作选择，不代表稳定成功率。
+结果：20 项自动测试通过；13 组离线 CLI 输入、实际输出及 Trace；9 组真实 DeepSeek 模型实际输出及 Trace。测试日志见 [`examples/test-results.txt`](../examples/test-results.txt)。离线 Mock 只验证流程和边界；真实模型运行记录证明的是这九次运行的动作选择，不代表稳定成功率。
 
 ## 验收点与证据
 
@@ -23,9 +23,10 @@ python3 examples/run_model_examples.py  # 需 DEEPSEEK_API_KEY 和网络
 | 上下文追问 | [`followup` 输入](../examples/inputs/followup.json)、[`真实输出`](../examples/model_outputs/deepseek_followup.json)、[`真实 Trace`](../examples/model_traces/deepseek_followup.json) | 当前句无主题词，结合历史找到 D03；模型在一次结束校验拒绝后补查，再给引用回答 |
 | 工具失败 | [`tool_failure` 输入](../examples/inputs/tool_failure.json)、[`真实输出`](../examples/model_outputs/deepseek_tool_failure.json)、[`真实 Trace`](../examples/model_traces/deepseek_tool_failure.json) | 首次读取超时记为失败，模型观察后再次读取成功；失败读取未进入引用 |
 | 单一制度 | [`solo_policy` 输出](../examples/outputs/solo_policy.json)、[`Trace`](../examples/traces/solo_policy.json) | 仅 D01 时可依据原文答 30 天 |
-| 原文替换与动作变化 | [`45 天资料`](../data/changed_policy_45.json)、[`实际输出`](../examples/outputs/changed_policy_45.json)、[`Trace`](../examples/traces/changed_policy_45.json) | D01 从 30 改为 45 后，答案及引用同步变为 45 天 |
-| 冲突消除 | [`同为 30 天的资料`](../data/aligned_policies.json)、[`实际输出`](../examples/outputs/aligned_policies.json)、[`Trace`](../examples/traces/aligned_policies.json) | D02 改为 30 后，动作从追问变为有依据回答 |
+| 原文替换与动作变化 | [`45 天资料`](../data/changed_policy_45.json)、[`真实输出`](../examples/model_outputs/deepseek_changed_policy_45.json)、[`真实 Trace`](../examples/model_traces/deepseek_changed_policy_45.json) | D01 从 30 改为 45 后，答案及引用同步变为 45 天 |
+| 冲突消除 | [`同为 30 天的资料`](../data/aligned_policies.json)、[`真实输出`](../examples/model_outputs/deepseek_aligned_policies.json)、[`真实 Trace`](../examples/model_traces/deepseek_aligned_policies.json) | D02 改为 30 后，模型结束动作从追问变为有依据回答 |
 | 细节缺失 | [`unsupported_detail` 输出](../examples/outputs/unsupported_detail.json)、[`Trace`](../examples/traces/unsupported_detail.json) | FAQ 未写验证码有效期，返回资料不足，不编造天数 |
+| 同主题但不相关的细节 | [`unsupported_payout` 输入](../examples/inputs/unsupported_payout.json)、[`真实输出`](../examples/model_outputs/deepseek_unsupported_payout.json)、[`真实 Trace`](../examples/model_traces/deepseek_unsupported_payout.json) | “报销多久到账”不能用“报销提交期限”作答；模型补查后返回资料不足 |
 | 上限 | [`step_limit` 输出](../examples/outputs/step_limit.json)、[`Trace`](../examples/traces/step_limit.json) | 明确 `incomplete/step_limit`，没有回答 |
 
 真实 Trace 每步均含模型动作、参数、工具观察、后续动作及简短决策依据；不记录模型内部思维。真实模型偶尔请求并行工具，执行器将整批拒绝并要求重新单步选择，拒绝事件不计业务工具调用数。
@@ -41,4 +42,4 @@ python3 examples/run_model_examples.py  # 需 DEEPSEEK_API_KEY 和网络
 
 ## 局限
 
-别名检索适合这套小型合成语料，未验证大规模、拼写错误和跨文档语义检索。程序级冲突检测主要针对报销期限的“数字 + 天”，其他隐含矛盾可能无法识别；细节缺失判定也只覆盖示例中定义的问法。六次真实模型运行不能说明稳定成功率。资料、日期、权限和 IT 流程均为合成数据，没有连接内部知识库或审批系统。
+别名检索适合这套小型合成语料，未验证大规模、拼写错误和跨文档语义检索。程序级冲突检测主要针对报销期限的“数字 + 天”，其他隐含矛盾可能无法识别；细节缺失判定也只覆盖示例中定义的问法。九次真实模型运行不能说明稳定成功率。资料、日期、权限和 IT 流程均为合成数据，没有连接内部知识库或审批系统。

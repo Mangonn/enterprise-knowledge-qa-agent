@@ -40,7 +40,7 @@ python3 -m src.cli examples/inputs/tool_failure.json --mode deepseek --fail-once
 | 内容 | 位置 |
 | --- | --- |
 | 问题输入、实际输出、逐步 Trace | [`examples/`](examples/) |
-| 12 组离线案例重跑 | `python3 examples/run_examples.py` |
+| 13 组离线案例重跑 | `python3 examples/run_examples.py` |
 | 自动测试与结果 | [`tests/test_agent.py`](tests/test_agent.py)、[`examples/test-results.txt`](examples/test-results.txt) |
 | 带 ID、版本日期及替换样例的合成资料 | [`data/`](data/) |
 | 需求、设计、评估、AI 使用与复盘 | [`docs/`](docs/) |

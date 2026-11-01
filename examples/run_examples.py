@@ -13,6 +13,7 @@ CASES = {
     "outside": "insufficient", "paraphrase": "needs_clarification",
     "followup": "answered", "tool_failure": "answered",
     "solo_policy": "answered", "unsupported_detail": "insufficient",
+    "unsupported_payout": "insufficient",
     "search_failure": "answered", "step_limit": "incomplete",
     "changed_policy_45": "answered", "aligned_policies": "answered",
 }

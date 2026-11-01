@@ -116,8 +116,13 @@ class KnowledgeBase:
         text = normalize(question)
         combined = " ".join(quotes)
         if topic == "expense_deadline":
-            return any(word in text for word in ("收费", "价格", "例外", "手续费"))
-        if any(word in text for word in ("有效期", "多久", "几天", "多少分钟", "收费", "价格")):
+            other_details = ("到账", "打款", "支付", "额度", "上限", "比例", "发票要求",
+                             "审批", "流程", "收费", "价格", "例外", "手续费")
+            deadline_cues = ("期限", "最晚", "截止", "时限", "天内", "几天", "提交", "发生后")
+            return (any(word in text for word in other_details)
+                    or not any(word in text for word in deadline_cues))
+        if any(word in text for word in ("有效期", "多久", "几天", "多少分钟", "收费", "价格",
+                                         "密码长度", "复杂度", "被盗", "锁定")):
             return re.search(r"\d+\s*(分钟|小时|天|元)", combined) is None
         return False
 

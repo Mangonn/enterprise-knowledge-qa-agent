@@ -99,6 +99,12 @@ class KnowledgeAcceptanceTests(unittest.TestCase):
         self.assertIn("细节", result["evidence_gaps"][0])
         self.assertEqual(result["citations"][0]["document_id"], "D03")
 
+    def test_same_topic_but_unsupported_payout_detail_is_not_answered(self):
+        result = self.case("unsupported_payout")
+        self.assertEqual(result["task_status"], "insufficient")
+        self.assertNotIn("报销期限为", result["answer"])
+        self.assertEqual([item["document_id"] for item in result["citations"]], ["D01", "D02"])
+
     def test_replacing_source_text_changes_answer_and_hash(self):
         old = self.case("solo_policy", corpus_path=ROOT / "data/solo_reimbursement.json")
         with tempfile.TemporaryDirectory() as directory:
