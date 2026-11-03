@@ -10,7 +10,7 @@ python3 examples/run_examples.py
 python3 examples/run_model_examples.py  # 需 DEEPSEEK_API_KEY 和网络
 ```
 
-结果：20 项自动测试通过；13 组离线 CLI 输入、实际输出及 Trace；9 组真实 DeepSeek 模型实际输出及 Trace。测试日志见 [`examples/test-results.txt`](../examples/test-results.txt)。离线 Mock 只验证流程和边界；真实模型运行记录证明的是这九次运行的动作选择，不代表稳定成功率。
+结果：21 项自动测试通过；13 组离线 CLI 输入、实际输出及 Trace；9 组真实 DeepSeek 模型实际输出及 Trace。测试日志见 [`examples/test-results.txt`](../examples/test-results.txt)。离线 Mock 只验证流程和边界；真实模型运行记录证明的是这九次运行的动作选择，不代表稳定成功率。
 
 ## 验收点与证据
 
@@ -20,7 +20,7 @@ python3 examples/run_model_examples.py  # 需 DEEPSEEK_API_KEY 和网络
 | 文档冲突 | [`conflict` 输入](../examples/inputs/conflict.json)、[`真实输出`](../examples/model_outputs/deepseek_conflict.json)、[`真实 Trace`](../examples/model_traces/deepseek_conflict.json) | 读取 D01 的 30 天和 D02 的 15 天；标记冲突，追问适用制度，不选较新的日期 |
 | 资料外问题 | [`outside` 输入](../examples/inputs/outside.json)、[`真实输出`](../examples/model_outputs/deepseek_outside.json)、[`真实 Trace`](../examples/model_traces/deepseek_outside.json) | 模型多次尝试不同检索词仍无命中，返回资料不足且无虚构引用 |
 | 改写后的相似问题 | [`paraphrase` 输入](../examples/inputs/paraphrase.json)、[`真实输出`](../examples/model_outputs/deepseek_paraphrase.json)、[`真实 Trace`](../examples/model_traces/deepseek_paraphrase.json) | “花完钱最晚几天报账”检索到 D01/D02，保留同样的冲突判断 |
-| 上下文追问 | [`followup` 输入](../examples/inputs/followup.json)、[`真实输出`](../examples/model_outputs/deepseek_followup.json)、[`真实 Trace`](../examples/model_traces/deepseek_followup.json) | 当前句无主题词，结合历史找到 D03；模型在一次结束校验拒绝后补查，再给引用回答 |
+| 上下文追问 | [`followup` 输入](../examples/inputs/followup.json)、[`真实输出`](../examples/model_outputs/deepseek_followup.json)、[`真实 Trace`](../examples/model_traces/deepseek_followup.json) | 当前句无主题词，结合历史找到 D03；“收不到验证码邮件”未见于原文，结束校验拒绝直接回答，补查后返回资料不足及 D03 引用 |
 | 工具失败 | [`tool_failure` 输入](../examples/inputs/tool_failure.json)、[`真实输出`](../examples/model_outputs/deepseek_tool_failure.json)、[`真实 Trace`](../examples/model_traces/deepseek_tool_failure.json) | 首次读取超时记为失败，模型观察后再次读取成功；失败读取未进入引用 |
 | 单一制度 | [`solo_policy` 输出](../examples/outputs/solo_policy.json)、[`Trace`](../examples/traces/solo_policy.json) | 仅 D01 时可依据原文答 30 天 |
 | 原文替换与动作变化 | [`45 天资料`](../data/changed_policy_45.json)、[`真实输出`](../examples/model_outputs/deepseek_changed_policy_45.json)、[`真实 Trace`](../examples/model_traces/deepseek_changed_policy_45.json) | D01 从 30 改为 45 后，答案及引用同步变为 45 天 |
@@ -38,6 +38,7 @@ python3 examples/run_model_examples.py  # 需 DEEPSEEK_API_KEY 和网络
 - D01/D02 全部读完后，若模型仍要求单一答案：结束被拒绝为 `unresolved_document_conflict`。
 - 读取与搜索各注入一次超时：失败步骤保持失败，后续成功结果有单独步骤。工具调用或决策步数达限会明确未完成。
 - 若所有检索都失败，结束校验拒绝将工具故障冒充“资料不存在”。
+- 根据 2026-11-03 评审意见增加“收不到验证码邮件”用例；D03 的“企业邮箱不可用”不能直接替代“验证码邮件未送达”的故障说明。
 - 没有模型密钥时 `--mode deepseek` 返回 `model_unavailable`，不把 Mock 运行冒充模型运行。
 
 ## 局限

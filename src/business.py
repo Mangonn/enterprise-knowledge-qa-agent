@@ -115,6 +115,9 @@ class KnowledgeBase:
     def _unsupported_detail(question: str, topic: str, quotes: list[str]) -> bool:
         text = normalize(question)
         combined = " ".join(quotes)
+        if topic == "password_reset" and any(cue in text for cue in
+                                              ("收不到", "没收到", "未收到", "收不到验证码", "收不到邮件")):
+            return not any(cue in normalize(combined) for cue in ("收不到", "没收到", "未收到"))
         if topic == "expense_deadline":
             other_details = ("到账", "打款", "支付", "额度", "上限", "比例", "发票要求",
                              "审批", "流程", "收费", "价格", "例外", "手续费")

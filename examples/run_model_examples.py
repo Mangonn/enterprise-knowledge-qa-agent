@@ -17,9 +17,12 @@ def verify(case: str, result: dict) -> None:
     trace = result["trace"]
     if result["mode"] != "deepseek_chat":
         raise RuntimeError(f"{case}: this was not a real model run")
-    if case in ("clear_answer", "followup", "tool_failure"):
+    if case in ("clear_answer", "tool_failure"):
         if result["task_status"] != "answered" or [item["document_id"] for item in result["citations"]] != ["D03"]:
             raise RuntimeError(f"{case}: expected a sourced D03 answer")
+    if case == "followup" and (result["task_status"] != "insufficient"
+                               or [item["document_id"] for item in result["citations"]] != ["D03"]):
+        raise RuntimeError("followup: unsupported email-delivery detail was answered")
     if case in ("conflict", "paraphrase"):
         if (result["task_status"] != "needs_clarification" or not result["conflict"]
                 or [item["document_id"] for item in result["citations"]] != ["D01", "D02"]):

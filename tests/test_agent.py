@@ -62,14 +62,20 @@ class KnowledgeAcceptanceTests(unittest.TestCase):
         self.assertEqual(result["task_status"], "needs_clarification")
         self.assertEqual([x["document_id"] for x in result["citations"]], ["D01", "D02"])
 
-    def test_followup_uses_history_and_cites_password_faq(self):
+    def test_followup_uses_history_without_answering_unsupported_detail(self):
         result = self.case("followup")
         self.assertEqual(KnowledgeBase(ROOT / "data/documents.json").topics_for(
             self.payload("followup")["question"]), [])
         self.assertEqual(result["target_topics"], ["password_reset"])
-        self.assertEqual(result["task_status"], "answered")
+        self.assertEqual(result["task_status"], "insufficient")
         self.assertEqual(result["citations"][0]["document_id"], "D03")
-        self.assertIn("联系 IT 服务台", result["answer"])
+        self.assertIn("原文没有回答", result["answer"])
+
+    def test_missing_verification_email_detail_is_not_inferred_from_mailbox_unavailable(self):
+        request = {"question": "重置密码收不到验证码邮件怎么办？"}
+        result = run(request, model=MockPolicy())
+        self.assertEqual(result["task_status"], "insufficient")
+        self.assertEqual([item["document_id"] for item in result["citations"]], ["D03"])
 
     def test_read_timeout_is_failed_and_then_model_retries(self):
         result = self.case("tool_failure", fail_once={"read_snippet"})

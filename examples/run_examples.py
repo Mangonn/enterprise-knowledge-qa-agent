@@ -11,7 +11,7 @@ TRACES = ROOT / "examples/traces"
 CASES = {
     "clear_answer": "answered", "conflict": "needs_clarification",
     "outside": "insufficient", "paraphrase": "needs_clarification",
-    "followup": "answered", "tool_failure": "answered",
+    "followup": "insufficient", "tool_failure": "answered",
     "solo_policy": "answered", "unsupported_detail": "insufficient",
     "unsupported_payout": "insufficient",
     "search_failure": "answered", "step_limit": "incomplete",

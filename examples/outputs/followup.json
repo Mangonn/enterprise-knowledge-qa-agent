@@ -10,8 +10,8 @@
       "content": "请先查看账号找回 FAQ。"
     }
   ],
-  "task_status": "answered",
-  "answer": "依据已读取的原文：D03（2026-03-01）：“忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。”。",
+  "task_status": "insufficient",
+  "answer": "已找到相关资料，但原文没有回答所问的具体细节。",
   "citations": [
     {
       "ok": true,
@@ -24,7 +24,9 @@
       "source_hash": "23eb914d9ff1"
     }
   ],
-  "evidence_gaps": [],
+  "evidence_gaps": [
+    "所问细节未见于现有原文"
+  ],
   "incomplete_reason": null,
   "conflict": false,
   "clarification_question": null,
@@ -120,8 +122,8 @@
       "tool_result": {
         "ok": true,
         "accepted": true,
-        "task_status": "answered",
-        "answer": "依据已读取的原文：D03（2026-03-01）：“忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。”。",
+        "task_status": "insufficient",
+        "answer": "已找到相关资料，但原文没有回答所问的具体细节。",
         "citations": [
           {
             "ok": true,
@@ -134,7 +136,9 @@
             "source_hash": "23eb914d9ff1"
           }
         ],
-        "evidence_gaps": [],
+        "evidence_gaps": [
+          "所问细节未见于现有原文"
+        ],
         "incomplete_reason": null,
         "conflict": false,
         "clarification_question": null
@@ -199,13 +203,13 @@
       "actor": "mock_policy",
       "action": "finish",
       "arguments": {
-        "status": "answered"
+        "status": "insufficient"
       },
       "observation": {
         "ok": true,
         "accepted": true,
-        "task_status": "answered",
-        "answer": "依据已读取的原文：D03（2026-03-01）：“忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。”。",
+        "task_status": "insufficient",
+        "answer": "已找到相关资料，但原文没有回答所问的具体细节。",
         "citations": [
           {
             "ok": true,
@@ -218,12 +222,14 @@
             "source_hash": "23eb914d9ff1"
           }
         ],
-        "evidence_gaps": [],
+        "evidence_gaps": [
+          "所问细节未见于现有原文"
+        ],
         "incomplete_reason": null,
         "conflict": false,
         "clarification_question": null
       },
-      "decision_basis": "已读取原文，相关资料可支持回答",
+      "decision_basis": "原文未覆盖所问细节",
       "next_action": null
     }
   ]

@@ -10,8 +10,8 @@
       "content": "请先查看账号找回 FAQ。"
     }
   ],
-  "task_status": "answered",
-  "answer": "依据已读取的原文：D03（2026-03-01）：“忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。”。",
+  "task_status": "insufficient",
+  "answer": "已找到相关资料，但原文没有回答所问的具体细节。",
   "citations": [
     {
       "ok": true,
@@ -24,7 +24,9 @@
       "source_hash": "23eb914d9ff1"
     }
   ],
-  "evidence_gaps": [],
+  "evidence_gaps": [
+    "所问细节未见于现有原文"
+  ],
   "incomplete_reason": null,
   "conflict": false,
   "clarification_question": null,
@@ -37,7 +39,7 @@
     "search_documents": [
       {
         "ok": true,
-        "query": "账号找回 密码重置 收不到邮件",
+        "query": "密码重置 收不到重置邮件 怎么办",
         "matched_topics": [
           "password_reset"
         ],
@@ -58,28 +60,7 @@
       },
       {
         "ok": true,
-        "query": "验证码 邮件未收到 延迟 垃圾邮件 重发",
-        "matched_topics": [
-          "password_reset"
-        ],
-        "matches": [
-          {
-            "document_id": "D03",
-            "title": "员工账号找回 FAQ",
-            "version_date": "2026-03-01",
-            "topic": "password_reset",
-            "snippet_ids": [
-              "S01"
-            ],
-            "scope": "全体员工",
-            "priority": null
-          }
-        ],
-        "corpus_revision": "31c9237ed104"
-      },
-      {
-        "ok": true,
-        "query": "企业邮箱不可用 联系 IT 服务台",
+        "query": "验证码收不到 邮件未收到 重发 垃圾邮件 排查",
         "matched_topics": [
           "password_reset"
         ],
@@ -112,15 +93,24 @@
       }
     ]
   },
-  "tool_call_count": 4,
+  "tool_call_count": 3,
   "steps": [
     {
       "step": 1,
+      "action": "parallel_calls_rejected",
+      "status": "failed",
+      "tool_result": {
+        "ok": false,
+        "error": "parallel_calls_rejected"
+      }
+    },
+    {
+      "step": 2,
       "action": "search_documents",
       "status": "succeeded",
       "tool_result": {
         "ok": true,
-        "query": "账号找回 密码重置 收不到邮件",
+        "query": "密码重置 收不到重置邮件 怎么办",
         "matched_topics": [
           "password_reset"
         ],
@@ -141,7 +131,7 @@
       }
     },
     {
-      "step": 2,
+      "step": 3,
       "action": "read_snippet",
       "status": "succeeded",
       "tool_result": {
@@ -156,39 +146,13 @@
       }
     },
     {
-      "step": 3,
-      "action": "search_documents",
-      "status": "succeeded",
-      "tool_result": {
-        "ok": true,
-        "query": "验证码 邮件未收到 延迟 垃圾邮件 重发",
-        "matched_topics": [
-          "password_reset"
-        ],
-        "matches": [
-          {
-            "document_id": "D03",
-            "title": "员工账号找回 FAQ",
-            "version_date": "2026-03-01",
-            "topic": "password_reset",
-            "snippet_ids": [
-              "S01"
-            ],
-            "scope": "全体员工",
-            "priority": null
-          }
-        ],
-        "corpus_revision": "31c9237ed104"
-      }
-    },
-    {
       "step": 4,
       "action": "finish",
       "status": "failed",
       "tool_result": {
         "ok": false,
         "accepted": false,
-        "error": "answer_available"
+        "error": "requested_detail_not_in_sources"
       }
     },
     {
@@ -197,7 +161,7 @@
       "status": "succeeded",
       "tool_result": {
         "ok": true,
-        "query": "企业邮箱不可用 联系 IT 服务台",
+        "query": "验证码收不到 邮件未收到 重发 垃圾邮件 排查",
         "matched_topics": [
           "password_reset"
         ],
@@ -224,8 +188,8 @@
       "tool_result": {
         "ok": true,
         "accepted": true,
-        "task_status": "answered",
-        "answer": "依据已读取的原文：D03（2026-03-01）：“忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。”。",
+        "task_status": "insufficient",
+        "answer": "已找到相关资料，但原文没有回答所问的具体细节。",
         "citations": [
           {
             "ok": true,
@@ -238,7 +202,9 @@
             "source_hash": "23eb914d9ff1"
           }
         ],
-        "evidence_gaps": [],
+        "evidence_gaps": [
+          "所问细节未见于现有原文"
+        ],
         "incomplete_reason": null,
         "conflict": false,
         "clarification_question": null
@@ -249,13 +215,26 @@
     {
       "step": 1,
       "actor": "deepseek_chat",
+      "action": "parallel_calls_rejected",
+      "arguments": {},
+      "observation": {
+        "ok": false,
+        "error": "parallel_calls_rejected"
+      },
+      "decision_basis": "并行动作可能跳过检索与原文读取的依赖",
+      "model_turn": 1,
+      "next_action": "search_documents"
+    },
+    {
+      "step": 2,
+      "actor": "deepseek_chat",
       "action": "search_documents",
       "arguments": {
-        "query": "账号找回 密码重置 收不到邮件"
+        "query": "密码重置 收不到重置邮件 怎么办"
       },
       "observation": {
         "ok": true,
-        "query": "账号找回 密码重置 收不到邮件",
+        "query": "密码重置 收不到重置邮件 怎么办",
         "matched_topics": [
           "password_reset"
         ],
@@ -274,12 +253,12 @@
         ],
         "corpus_revision": "31c9237ed104"
       },
-      "decision_basis": "用户询问重置密码时收不到邮件怎么办，需查找账号找回 FAQ",
-      "model_turn": 1,
+      "decision_basis": "用户追问密码重置邮件收不到时的处理方式",
+      "model_turn": 2,
       "next_action": "read_snippet"
     },
     {
-      "step": 2,
+      "step": 3,
       "actor": "deepseek_chat",
       "action": "read_snippet",
       "arguments": {
@@ -296,39 +275,7 @@
         "quote": "忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。",
         "source_hash": "23eb914d9ff1"
       },
-      "decision_basis": "读取账号找回 FAQ 原文判断是否覆盖收不到邮件的情况",
-      "model_turn": 2,
-      "next_action": "search_documents"
-    },
-    {
-      "step": 3,
-      "actor": "deepseek_chat",
-      "action": "search_documents",
-      "arguments": {
-        "query": "验证码 邮件未收到 延迟 垃圾邮件 重发"
-      },
-      "observation": {
-        "ok": true,
-        "query": "验证码 邮件未收到 延迟 垃圾邮件 重发",
-        "matched_topics": [
-          "password_reset"
-        ],
-        "matches": [
-          {
-            "document_id": "D03",
-            "title": "员工账号找回 FAQ",
-            "version_date": "2026-03-01",
-            "topic": "password_reset",
-            "snippet_ids": [
-              "S01"
-            ],
-            "scope": "全体员工",
-            "priority": null
-          }
-        ],
-        "corpus_revision": "31c9237ed104"
-      },
-      "decision_basis": "FAQ 只提到邮箱不可用联系IT，进一步确认是否有邮件未收到的专门处理说明",
+      "decision_basis": "读取账号找回 FAQ 原文",
       "model_turn": 3,
       "next_action": "finish"
     },
@@ -337,14 +284,14 @@
       "actor": "deepseek_chat",
       "action": "finish",
       "arguments": {
-        "status": "insufficient"
+        "status": "answered"
       },
       "observation": {
         "ok": false,
         "accepted": false,
-        "error": "answer_available"
+        "error": "requested_detail_not_in_sources"
       },
-      "decision_basis": "现有文档仅说明企业邮箱不可用时联系IT服务台，未提供针对收不到验证码邮件的具体处理细节。",
+      "decision_basis": "D03 说明企业邮箱不可用时联系 IT 服务台，可直接回答",
       "model_turn": 4,
       "next_action": "search_documents"
     },
@@ -353,11 +300,11 @@
       "actor": "deepseek_chat",
       "action": "search_documents",
       "arguments": {
-        "query": "企业邮箱不可用 联系 IT 服务台"
+        "query": "验证码收不到 邮件未收到 重发 垃圾邮件 排查"
       },
       "observation": {
         "ok": true,
-        "query": "企业邮箱不可用 联系 IT 服务台",
+        "query": "验证码收不到 邮件未收到 重发 垃圾邮件 排查",
         "matched_topics": [
           "password_reset"
         ],
@@ -376,7 +323,7 @@
         ],
         "corpus_revision": "31c9237ed104"
       },
-      "decision_basis": "校验系统提示存在可用答案，搜索邮箱不可用替代途径的相关文档",
+      "decision_basis": "确认是否有文档说明验证码未收到时的具体排查步骤",
       "model_turn": 5,
       "next_action": "finish"
     },
@@ -385,13 +332,13 @@
       "actor": "deepseek_chat",
       "action": "finish",
       "arguments": {
-        "status": "answered"
+        "status": "insufficient"
       },
       "observation": {
         "ok": true,
         "accepted": true,
-        "task_status": "answered",
-        "answer": "依据已读取的原文：D03（2026-03-01）：“忘记密码时，员工应在统一身份门户点击“忘记密码”，通过企业邮箱验证码重置；若企业邮箱不可用，联系 IT 服务台。”。",
+        "task_status": "insufficient",
+        "answer": "已找到相关资料，但原文没有回答所问的具体细节。",
         "citations": [
           {
             "ok": true,
@@ -404,12 +351,14 @@
             "source_hash": "23eb914d9ff1"
           }
         ],
-        "evidence_gaps": [],
+        "evidence_gaps": [
+          "所问细节未见于现有原文"
+        ],
         "incomplete_reason": null,
         "conflict": false,
         "clarification_question": null
       },
-      "decision_basis": "已读取员工账号找回FAQ原文：若企业邮箱不可用，联系IT服务台处理。",
+      "decision_basis": "文档仅说明企业邮箱不可用时联系 IT 服务台，未提供验证码/邮件收不到的具体排查步骤",
       "model_turn": 6,
       "next_action": null
     }

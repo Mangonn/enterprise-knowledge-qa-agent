@@ -4,8 +4,9 @@ test_conflict_cannot_be_finished_as_single_answer (test_agent.KnowledgeAcceptanc
 test_conflict_reads_both_and_asks_for_applicability (test_agent.KnowledgeAcceptanceTests.test_conflict_reads_both_and_asks_for_applicability) ... ok
 test_deepseek_adapter_feeds_observation_to_next_turn (test_agent.KnowledgeAcceptanceTests.test_deepseek_adapter_feeds_observation_to_next_turn) ... ok
 test_failed_search_cannot_be_misreported_as_no_document (test_agent.KnowledgeAcceptanceTests.test_failed_search_cannot_be_misreported_as_no_document) ... ok
-test_followup_uses_history_and_cites_password_faq (test_agent.KnowledgeAcceptanceTests.test_followup_uses_history_and_cites_password_faq) ... ok
+test_followup_uses_history_without_answering_unsupported_detail (test_agent.KnowledgeAcceptanceTests.test_followup_uses_history_without_answering_unsupported_detail) ... ok
 test_limits_return_explicit_incomplete_state (test_agent.KnowledgeAcceptanceTests.test_limits_return_explicit_incomplete_state) ... ok
+test_missing_verification_email_detail_is_not_inferred_from_mailbox_unavailable (test_agent.KnowledgeAcceptanceTests.test_missing_verification_email_detail_is_not_inferred_from_mailbox_unavailable) ... ok
 test_model_cannot_finish_before_search_or_read (test_agent.KnowledgeAcceptanceTests.test_model_cannot_finish_before_search_or_read) ... ok
 test_model_cannot_read_unsearched_document (test_agent.KnowledgeAcceptanceTests.test_model_cannot_read_unsearched_document) ... ok
 test_out_of_corpus_has_no_fabricated_citation (test_agent.KnowledgeAcceptanceTests.test_out_of_corpus_has_no_fabricated_citation) ... ok
@@ -20,6 +21,6 @@ test_single_policy_can_answer_thirty_days (test_agent.KnowledgeAcceptanceTests.t
 test_unsupported_detail_is_not_filled_in (test_agent.KnowledgeAcceptanceTests.test_unsupported_detail_is_not_filled_in) ... ok
 
 ----------------------------------------------------------------------
-Ran 20 tests in 0.047s
+Ran 21 tests in 0.081s
 
 OK
